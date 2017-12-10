@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CodeUnderflow.Common\CodeUnderflow.Common.csproj" />
+    <ProjectReference Include="..\CodeUnderflow.Data.Models\CodeUnderflow.Data.Models.csproj" />
+    <ProjectReference Include="..\CodeUnderflow.Data\CodeUnderflow.Data.csproj" />
+  </ItemGroup>
+
+</Project>
