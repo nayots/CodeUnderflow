@@ -1,1 +1,1 @@
-# CodeUnderflow
+# CodeUnderflow [![Build status](https://ci.appveyor.com/api/projects/status/8qms6wykm5q3yrij?svg=true)](https://ci.appveyor.com/project/stwel/codeunderflow)
