@@ -14,6 +14,7 @@ using CodeUnderflow.Web.Models;
 using CodeUnderflow.Web.Models.AccountViewModels;
 using CodeUnderflow.Web.Services;
 using CodeUnderflow.Services.Contracts;
+using CodeUnderflow.Data.Models;
 
 namespace CodeUnderflow.Web.Controllers
 {

@@ -14,6 +14,7 @@ using CodeUnderflow.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using CodeUnderflow.Services.Contracts;
 using CodeUnderflow.Services;
+using CodeUnderflow.Data.Models;
 
 namespace CodeUnderflow.Web
 {
