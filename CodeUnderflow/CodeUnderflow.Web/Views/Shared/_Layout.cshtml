@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CodeUnderflow.Web</title>
+    <title>@ViewData["Title"] - CodeUnderflow</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap-4.0.0-beta.2-dist/css/bootstrap.css" />
@@ -25,26 +25,40 @@
                     @await Html.PartialAsync("_LoginPartial")
         </nav>*@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Navbar</a>
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">CodeUnderflow</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" asp-controller="Questions" asp-action="Index">Questions<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" asp-controller="Users" asp-action="Index">Users<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" asp-controller="Tags" asp-action="Index">What's Hot<span class="sr-only">(current)</span></a>
                 </li>
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Questions" asp-action="New">Ask<span class="sr-only">(current)</span></a>
+                    </li>
+                }
             </ul>
+            <form class="form-inline" asp-controller="Search" asp-action="Index" method="get">
+                <div class="input-group">
+                    <input type="text" name="query" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </span>
+                </div>
+            </form>
         </div>
         @await Html.PartialAsync("_LoginPartial")
     </nav>
@@ -52,7 +66,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - CodeUnderflow.Web</p>
+            <p>&copy; 2017 - CodeUnderflow</p>
         </footer>
     </div>
 

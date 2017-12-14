@@ -15,6 +15,8 @@ using CodeUnderflow.Web.Models.AccountViewModels;
 using CodeUnderflow.Web.Services;
 using CodeUnderflow.Services.Contracts;
 using CodeUnderflow.Data.Models;
+using CodeUnderflow.Web.Data;
+using CodeUnderflow.Common;
 
 namespace CodeUnderflow.Web.Controllers
 {
@@ -26,17 +28,23 @@ namespace CodeUnderflow.Web.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private CodeUnderflowDbContext db;
+        private RoleManager<IdentityRole> _roleManager;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            CodeUnderflowDbContext dbContext,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            db = dbContext;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -63,7 +71,7 @@ namespace CodeUnderflow.Web.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -226,6 +234,17 @@ namespace CodeUnderflow.Web.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    if (this.db.Users.Count() == 1)
+                    {
+                        var adminRoleExists = await _roleManager.RoleExistsAsync(GlobalConstants.AdminRoleName);
+                        if (!adminRoleExists)
+                        {
+                            await _roleManager.CreateAsync(new IdentityRole(GlobalConstants.AdminRoleName));
+                        }
+
+                        await this._userManager.AddToRoleAsync(user, GlobalConstants.AdminRoleName);
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
