@@ -7,10 +7,6 @@ using Ganss.XSS;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeUnderflow.Web.Controllers
 {
@@ -57,8 +53,8 @@ namespace CodeUnderflow.Web.Controllers
         [Authorize]
         public IActionResult Edit(int? id)
         {
-            if (id != null 
-                && this.questionsService.Exists(id.Value) 
+            if (id != null
+                && this.questionsService.Exists(id.Value)
                 && (this.questionsService.IsAuthor(id.Value, this.User.GetUserId()) || this.User.IsInRole(GlobalConstants.AdminRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName)))
             {
                 QuestionEditModel model = this.questionsService.GetEditInfo(id.Value);
@@ -109,6 +105,38 @@ namespace CodeUnderflow.Web.Controllers
                 model.Content = this.htmlSanitizer.Sanitize(model.Content);
 
                 return View(model);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Vote()
+        {
+            //if (this.ModelState.IsValid && this.questionsService.Exists(registerVoteModel.QuestionId.Value))
+            //{
+            //    //DO STUFF
+
+            //    return RedirectToAction(nameof(Details), new { id = registerVoteModel.QuestionId.Value });
+            //}
+
+            var headers = this.Request.Headers;
+
+            if (headers.ContainsKey("QuestionId") && headers.ContainsKey("IsUpvote"))
+            {
+                if (int.TryParse(headers["QuestionId"], out int questionId) && bool.TryParse(headers["IsUpvote"], out bool isUpvote))
+                {
+                    if (this.questionsService.Exists(questionId))
+                    {
+                        //DO STUFF
+                        return Ok($"Vote registered: {questionId}, {isUpvote}");
+                    }
+                    else
+                    {
+                        return NotFound();
+                    }
+                }
             }
 
             return BadRequest();

@@ -21,6 +21,8 @@ namespace CodeUnderflow.Services.Models.Questions
 
         public string AuthorName { get; set; }
 
+        public int Votes { get; set; }
+
         public DateTime PostDate { get; set; }
 
         public DateTime? EditDate { get; set; }

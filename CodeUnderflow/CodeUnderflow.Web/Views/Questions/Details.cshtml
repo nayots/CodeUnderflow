@@ -24,21 +24,28 @@
             {
                 <span class="badge badge-pill badge-info">@tag</span>
             }
-            @if (this.User.Identity.IsAuthenticated && (this.User.Identity.Name == Model.AuthorName || (this.User.IsInRole(GlobalConstants.AdminRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName))))
-            {
-                <div class="text-right">
-                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-warning">Edit</a>
-                    <a class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#myModal">Delete</a>
+            <hr />
+            <div class="row">
+                    <div class="col-md-6 text-left">
+                        <button class="btn btn-sm btn-outline-success" id="upVote" type="submit"><i class="fas fa-arrow-up fa-2x"></i></button>
+                        <span>Votes: @Model.Votes</span>
+                        <button class="btn btn-sm btn-outline-danger" id="downVote"><i class="fas fa-arrow-down fa-2x"></i></button>
+                    </div>
+                    @if (this.User.Identity.IsAuthenticated && (this.User.Identity.Name == Model.AuthorName || (this.User.IsInRole(GlobalConstants.AdminRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName))))
+                    {
+                        <div class="col-md-6 text-right">
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-warning">Edit <i class="fas fa-edit"></i></a>
+                            <a class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#myModal">Delete <i class="fas fa-trash"></i></a>
+                        </div>
+                    }
                 </div>
-            }
-
         </div>
     </div>
     <div class="col-md-3" style="background-color:aqua">
         TEST
     </div>
 </div>
-
+<input id="itemId" type="hidden" value="@Model.Id"></input>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -53,10 +60,10 @@
                 @Model.Title
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel <i class="fas fa-chevron-circle-left"></i></button>
                 <form asp-action="Delete" method="post">
                     <input name="id" type="hidden"  value="@Model.Id"/>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger">Delete <i class="fas fa-trash"></i></button>
                 </form>
             </div>
         </div>
