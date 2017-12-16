@@ -5,7 +5,8 @@
     "jquery": "3.2.1",
     "jquery-validation": "1.17.0",
     "jquery-validation-unobtrusive": "3.2.6",
-    "popper.js": "v1.12.3"
+    "popper.js": "v1.12.3",
+    "trumbowyg": "v2.9.2"
   },
   "resolutions": {
     "jquery": "3.2.1",

@@ -43,7 +43,7 @@ namespace CodeUnderflow.Data.Migrations
 
                     b.HasIndex("QuestionId");
 
-                    b.ToTable("Answer");
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("CodeUnderflow.Data.Models.Question", b =>
@@ -56,9 +56,14 @@ namespace CodeUnderflow.Data.Migrations
                     b.Property<string>("Content")
                         .IsRequired();
 
+                    b.Property<DateTime?>("EditDate");
+
                     b.Property<bool>("IsArchived");
 
                     b.Property<DateTime>("PostDate");
+
+                    b.Property<string>("Title")
+                        .IsRequired();
 
                     b.Property<int>("Votes");
 
@@ -66,7 +71,7 @@ namespace CodeUnderflow.Data.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Question");
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("CodeUnderflow.Data.Models.QuestionTag", b =>
@@ -102,7 +107,7 @@ namespace CodeUnderflow.Data.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Reply");
+                    b.ToTable("Replies");
                 });
 
             modelBuilder.Entity("CodeUnderflow.Data.Models.Tag", b =>
@@ -115,7 +120,7 @@ namespace CodeUnderflow.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tag");
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("CodeUnderflow.Data.Models.User", b =>

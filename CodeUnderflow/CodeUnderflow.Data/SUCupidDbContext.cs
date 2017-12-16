@@ -10,6 +10,11 @@ namespace CodeUnderflow.Web.Data
 {
     public class CodeUnderflowDbContext : IdentityDbContext<User>
     {
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Reply> Replies { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+
         public CodeUnderflowDbContext(DbContextOptions<CodeUnderflowDbContext> options)
             : base(options)
         {

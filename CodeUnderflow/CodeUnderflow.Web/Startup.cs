@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 using CodeUnderflow.Services.Contracts;
 using CodeUnderflow.Services;
 using CodeUnderflow.Data.Models;
+using AutoMapper;
 
 namespace CodeUnderflow.Web
 {
@@ -46,8 +47,12 @@ namespace CodeUnderflow.Web
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IQuestionsService, QuestionsService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddRouting(options => options.LowercaseUrls = true);
+
+            services.AddAutoMapper();
 
             services.AddMvc(options =>
             {

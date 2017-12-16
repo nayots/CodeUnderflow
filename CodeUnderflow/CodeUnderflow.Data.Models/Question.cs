@@ -8,6 +8,10 @@ namespace CodeUnderflow.Data.Models
     {
         public int Id { get; set; }
 
+        [Required]
+        [MinLength(2)]
+        public string Title { get; set; }
+
         public string AuthorId { get; set; }
 
         public User Author { get; set; }
@@ -25,5 +29,7 @@ namespace CodeUnderflow.Data.Models
         public bool IsArchived { get; set; }
 
         public DateTime PostDate { get; set; }
+
+        public DateTime? EditDate { get; set; }
     }
 }

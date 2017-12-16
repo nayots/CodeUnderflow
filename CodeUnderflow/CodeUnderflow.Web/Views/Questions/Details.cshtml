@@ -1,0 +1,69 @@
+﻿@model QuestionDetailsModel
+@{
+    this.ViewData["Title"] = Model.Title;
+}
+
+<div class="row main-container">
+    <div class="col-md-9">
+        <div class="text-left">
+            <h3 class="text-lg-left"><em>@Model.Title</em></h3>
+        </div>
+        <div>
+            <div>
+                @Html.Raw(Model.Content)
+            </div>
+            <br />
+            <div class="card-footer">
+                <small class="text-muted">Posted on @Model.PostDate.ToLocalTime() by @Model.AuthorName</small>
+                @if (Model.EditDate.HasValue)
+                {
+                    <small class="text-muted">, last edit: @Model.EditDate.Value.ToLocalTime()</small>
+                }
+            </div>
+            @foreach (var tag in Model.Tags)
+            {
+                <span class="badge badge-pill badge-info">@tag</span>
+            }
+            @if (this.User.Identity.IsAuthenticated && (this.User.Identity.Name == Model.AuthorName || (this.User.IsInRole(GlobalConstants.AdminRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName))))
+            {
+                <div class="text-right">
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-warning">Edit</a>
+                    <a class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#myModal">Delete</a>
+                </div>
+            }
+
+        </div>
+    </div>
+    <div class="col-md-3" style="background-color:aqua">
+        TEST
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete this question ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Model.Title
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <form asp-action="Delete" method="post">
+                    <input name="id" type="hidden"  value="@Model.Id"/>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await Html.PartialAsync("_QuestionDetailsScripts")
+}

@@ -1,0 +1,16 @@
+﻿<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="~/lib/trumbowyg/dist/trumbowyg.js"></script>
+@*<script src="~/lib/trumbowyg/dist/plugins/preformatted/trumbowyg.preformatted.min.js"></script>*@
+<script>
+    $('#editor').trumbowyg({
+        btns: [
+            ['strong', 'em', 'del'],
+            ['link'],
+            ['unorderedList', 'orderedList'],
+            ['removeformat'],
+        ],
+        autogrow: false
+    });
+</script>
