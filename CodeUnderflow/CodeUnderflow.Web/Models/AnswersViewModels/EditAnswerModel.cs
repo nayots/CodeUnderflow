@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace CodeUnderflow.Web.Models.AnswersViewModels
 {
-    public class NewAnswerModel
+    public class EditAnswerModel
     {
+        [Required]
+        public int? AnswerId { get; set; }
+
+        [Required]
         public int? QuestionId { get; set; }
 
         [Required]

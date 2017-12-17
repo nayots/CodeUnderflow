@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace CodeUnderflow.Web.Models.AnswersViewModels
 {
-    public class NewAnswerModel
+    public class DeleteAnswerModel
     {
+        [Required]
         public int? QuestionId { get; set; }
 
         [Required]
-        [MinLength(2)]
-        [MaxLength(300)]
-        public string Content { get; set; }
+        public int? AnswerId { get; set; }
     }
 }

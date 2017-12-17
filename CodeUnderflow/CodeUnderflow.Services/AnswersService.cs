@@ -31,5 +31,37 @@ namespace CodeUnderflow.Services
             this.db.Answers.Add(answer);
             this.db.SaveChanges();
         }
+
+        public void Delete(int answerId)
+        {
+            var answer = this.db.Answers.First(a => a.Id == answerId);
+
+            this.db.Answers.Remove(answer);
+            this.db.SaveChanges();
+        }
+
+        public bool Exists(int answerId)
+        {
+            return this.db.Answers.Any(a => a.Id == answerId);
+        }
+
+        public string GetAnswerContent(int answerId)
+        {
+            return this.db.Answers.Where(a => a.Id == answerId).Select(a => a.Content).First();
+        }
+
+        public void Update(int answerId, string content)
+        {
+            var answer = this.db.Answers.First(a => a.Id == answerId);
+
+            answer.Content = content;
+
+            this.db.SaveChanges();
+        }
+
+        public bool UserCanEdit(int anwerId, string userId)
+        {
+            return this.db.Answers.Where(a => a.Id == anwerId && a.AuthorId == userId).Count() > 0;
+        }
     }
 }

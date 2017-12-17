@@ -1,3 +1,10 @@
 ﻿.main-container {
     margin-top:20px
 }
+.answer {
+    padding: 5px
+}
+
+.answers-table {
+    padding-top: 5px
+}
