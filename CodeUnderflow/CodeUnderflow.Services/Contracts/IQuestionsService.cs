@@ -18,5 +18,6 @@ namespace CodeUnderflow.Services.Contracts
         void Delete(int questionId);
         int RegisterVote(int questionId, string userId);
         bool UserHasStared(int questionId, string userId);
+        IEnumerable<QuestionInfoModel> GetLatestQuestion();
     }
 }

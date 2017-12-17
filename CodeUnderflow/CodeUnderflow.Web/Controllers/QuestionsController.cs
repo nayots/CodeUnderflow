@@ -16,19 +16,23 @@ namespace CodeUnderflow.Web.Controllers
     {
         private IQuestionsService questionsService;
         private IUserService userService;
+        private ITagService tagService;
         private HtmlSanitizer htmlSanitizer;
 
-        public QuestionsController(IQuestionsService questionsService, IUserService userService)
+        public QuestionsController(IQuestionsService questionsService, IUserService userService, ITagService tagService)
         {
             this.questionsService = questionsService;
             this.userService = userService;
+            this.tagService = tagService;
             this.htmlSanitizer = new HtmlSanitizer();
             this.htmlSanitizer.AllowedAttributes.Add("class");
         }
 
         public IActionResult Index()
         {
-            return Ok();
+            var model = this.questionsService.GetLatestQuestion();
+
+            return View(model);
         }
 
         [HttpGet]
@@ -107,6 +111,10 @@ namespace CodeUnderflow.Web.Controllers
                 this.ViewData["stared"] = this.questionsService.UserHasStared(id.Value, this.User.GetUserId());
 
                 model.Content = this.htmlSanitizer.Sanitize(model.Content);
+                model.SimilarTags = this.tagService.GetSimilarTags(model.Tags, 15);
+
+                this.ViewData["youtubeKeyword"] = Uri.EscapeDataString(string.Join(" ", model.Tags));
+
 
                 return View(model);
             }

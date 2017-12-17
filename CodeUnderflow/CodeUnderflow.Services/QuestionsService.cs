@@ -175,5 +175,12 @@ namespace CodeUnderflow.Services
         {
             return this.db.Questions.Include(q => q.Votes).Where(q => q.Id == questionId).First().Votes.Any(v => v.UserId == userId);
         }
+
+        public IEnumerable<QuestionInfoModel> GetLatestQuestion()
+        {
+            var latestQuestions = this.db.Questions.Include(q => q.Tags).OrderByDescending(q => q.PostDate).ProjectTo<QuestionInfoModel>().ToList();
+
+            return latestQuestions;
+        }
     }
 }

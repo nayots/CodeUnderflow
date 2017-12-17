@@ -20,6 +20,8 @@ namespace CodeUnderflow.Services.Models.Questions
 
         public IEnumerable<string> Tags { get; set; }
 
+        public IEnumerable<string> SimilarTags { get; set; }
+
         public string AuthorName { get; set; }
 
         public int Votes { get; set; }

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<QuestionInfoModel>
+@{
+    this.ViewData["Title"] = "Questions";
+}
+<div class="row">
+    <div class="container">
+        <div class="col-md-8 offset-2">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Answers</th>
+                        <th>Post Date</th>
+                        <th>Tags</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var question in Model)
+                    {
+                        <tr>
+                            @{ 
+                                var shortTitle = question.Title.Length <= 30 ? question.Title : question.Title.Substring(0, 28) + "..";
+                            }
+                            <td><a asp-action="Details" asp-controller="Questions" asp-route-id="@question.Id">@shortTitle</a></td>
+                            <td>@question.AnswersCount</td>
+                            <td><small>@question.PostDate.ToLocalTime()</small></td>
+                            <td>
+                                @foreach (var tag in question.Tags)
+                                {
+                                    <a href="#" class="badge-pill" style="padding:2px"><span class="badge badge-pill badge-info">@tag</span></a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

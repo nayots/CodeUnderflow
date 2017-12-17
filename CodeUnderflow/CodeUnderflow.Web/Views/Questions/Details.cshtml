@@ -6,7 +6,7 @@
 <div class="row main-container">
     <div class="col-md-9">
         <div class="text-left">
-            <h3 class="text-lg-left"><em>@Model.Title</em></h3>
+            <h3 class="text-lg-left text-truncate"><em>@Model.Title</em></h3>
         </div>
         <div>
             <div>
@@ -102,9 +102,17 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3" style="background-color:aqua">
-        TEST
+    <div class="col-md-3 text-center">
+        <h2>Popular tags</h2>
+        @foreach (var tag in Model.SimilarTags)
+        {
+            <span class="badge badge-pill badge-info">@tag</span>
+        }
+        <br />
+        <h2>Helpful materials</h2>
+        <iframe src="http://www.youtube.com/embed?autoplay=0&listType=search;list=@(this.ViewData["youtubeKeyword"])" frameborder="0" class="col-md-12"></iframe>
     </div>
+
 </div>
 <input id="itemId" type="hidden" value="@Model.Id"></input>
 <!-- Modal -->
