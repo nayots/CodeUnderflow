@@ -17,7 +17,5 @@ namespace CodeUnderflow.Data.Models
         public int QuestionId { get; set; }
 
         public Question Question { get; set; }
-
-        public bool IsUpvote { get; set; }
     }
 }

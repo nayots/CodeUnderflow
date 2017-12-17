@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CodeUnderflow.Services.Models.Questions;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeUnderflow.Services
 {
@@ -143,15 +144,36 @@ namespace CodeUnderflow.Services
             this.db.SaveChanges();
         }
 
-        public int RegisterVote(int questionId)
+        public int RegisterVote(int questionId, string userId)
         {
-            //var question = this.db.Questions.First(q => q.Id == questionId);
+            var question = this.db.Questions.Include(q => q.Votes).First(q => q.Id == questionId);
 
-            //question.Votes++;
+            Vote vote = null;
 
-            //this.db.SaveChanges();
+            if (question.Votes.Any(v => v.UserId == userId))
+            {
+                vote = question.Votes.First(v => v.UserId == userId);
 
-            return 0;
+                question.Votes.Remove(vote);
+            }
+            else
+            {
+                vote = new Vote()
+                {
+                    UserId = userId
+                };
+
+                question.Votes.Add(vote);
+            }
+
+            this.db.SaveChanges();
+
+            return question.Votes.Count;
+        }
+
+        public bool UserHasStared(int questionId, string userId)
+        {
+            return this.db.Questions.Include(q => q.Votes).Where(q => q.Id == questionId).First().Votes.Any(v => v.UserId == userId);
         }
     }
 }

@@ -26,19 +26,55 @@
             }
             <hr />
             <div class="row">
-                    <div class="col-md-6 text-left">
-                        <button class="btn btn-sm btn-outline-success" id="upVote" type="submit"><i class="fas fa-arrow-up fa-2x"></i></button>
+                <div class="col-md-6 text-left">
+                    <form asp-action="Vote" method="post">
+                        <input type="hidden" value="@Model.Id" name="questionId" />
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            bool.TryParse(ViewData["stared"].ToString(), out bool hasStared);
+
+                            if (hasStared)
+                            {
+                                <button class="btn btn-sm btn-warning" id="star" type="submit"><i class="fas fa-star fa-2x"></i></button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-sm btn-outline-warning" id="star" type="submit"><i class="far fa-star fa-2x"></i></button>
+                            }
+                        }
+                        else
+                        {
+                            <button class="btn btn-sm btn-outline-warning" disabled id="star" type="submit"><i class="far fa-star fa-2x"></i></button>
+                        }
                         <span>Votes: @Model.Votes</span>
-                        <button class="btn btn-sm btn-outline-danger" id="downVote"><i class="fas fa-arrow-down fa-2x"></i></button>
-                    </div>
+                    </form>
+                </div>
+                <div class="col-md-6 text-right">
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <a class="btn btn-sm btn-outline-info" data-toggle="modal" data-target="#answerModal">Answer <i class="fas fa-pencil-alt"></i></a>
+                    }
+                    else
+                    {
+                        <a asp-action="Login" asp-controller="Account" asp-route-returnUrl="/questions/details/@Model.Id" class="btn btn-sm btn-outline-info">Answer <i class="fas fa-pencil-alt"></i></a>
+                    }
                     @if (this.User.Identity.IsAuthenticated && (this.User.Identity.Name == Model.AuthorName || (this.User.IsInRole(GlobalConstants.AdminRoleName) || this.User.IsInRole(GlobalConstants.ModeratorRoleName))))
                     {
-                        <div class="col-md-6 text-right">
-                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-warning">Edit <i class="fas fa-edit"></i></a>
-                            <a class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#myModal">Delete <i class="fas fa-trash"></i></a>
-                        </div>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-warning">Edit <i class="fas fa-edit"></i></a>
+                        <a class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#myModal">Delete <i class="fas fa-trash"></i></a>
                     }
                 </div>
+            </div>
+            <div class="row">
+                <table class="table table-striped">
+                    @foreach (var answer in Model.Answers)
+                    {
+                        <tr>
+                            <td></td>
+                        </tr>
+                    }
+                </table>
+            </div>
         </div>
     </div>
     <div class="col-md-3" style="background-color:aqua">
@@ -62,10 +98,35 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel <i class="fas fa-chevron-circle-left"></i></button>
                 <form asp-action="Delete" method="post">
-                    <input name="id" type="hidden"  value="@Model.Id"/>
+                    <input name="id" type="hidden" value="@Model.Id" />
                     <button type="submit" class="btn btn-danger">Delete <i class="fas fa-trash"></i></button>
                 </form>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="answerModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Answer this question</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="New" asp-controller="Answers" method="post" id="answerForm">
+                <div class="modal-body">
+                    <input type="hidden" name="questionId" value="@Model.Id" />
+                    <textarea rows="8" id="answerText" name="content" class="form-control" maxlength="300" minlength="2"></textarea>
+                    <span id="answerTextWarning" class="text-danger">Content is a required field with length from 2 to 300 characters.</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel <i class="fas fa-chevron-circle-left"></i></button>
+                    <button type="submit" id="submitAnswer" class="btn btn-outline-info">Submit <i class="fas fa-save"></i></button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

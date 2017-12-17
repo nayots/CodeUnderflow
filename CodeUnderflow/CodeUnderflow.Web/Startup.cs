@@ -49,6 +49,7 @@ namespace CodeUnderflow.Web
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IQuestionsService, QuestionsService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAnswersService, AnswersService>();
 
             services.AddRouting(options => options.LowercaseUrls = true);
 

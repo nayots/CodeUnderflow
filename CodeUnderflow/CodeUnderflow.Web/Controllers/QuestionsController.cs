@@ -104,6 +104,8 @@ namespace CodeUnderflow.Web.Controllers
             {
                 QuestionDetailsModel model = this.questionsService.GetDetails(id.Value);
 
+                this.ViewData["stared"] = this.questionsService.UserHasStared(id.Value, this.User.GetUserId());
+
                 model.Content = this.htmlSanitizer.Sanitize(model.Content);
 
                 return View(model);
@@ -114,23 +116,17 @@ namespace CodeUnderflow.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Vote()
+        public IActionResult Vote(int? questionId)
         {
-            var headers = this.Request.Headers;
-
-            if (headers.ContainsKey("QuestionId") && headers.ContainsKey("IsUpvote"))
+            if (questionId != null && this.questionsService.Exists(questionId.Value))
             {
-                if (int.TryParse(headers["QuestionId"], out int questionId) && bool.TryParse(headers["IsUpvote"], out bool isUpvote))
-                {
-                    if (this.questionsService.Exists(questionId))
-                    {
-                        
-                    }
-                    else
-                    {
-                        return NotFound();
-                    }
-                }
+                var votesCount = this.questionsService.RegisterVote(questionId.Value, this.User.GetUserId());
+
+                return RedirectToAction(nameof(Details), new { id = questionId.Value });
+            }
+            else
+            {
+                return NotFound();
             }
 
             return BadRequest();

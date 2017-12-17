@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using CodeUnderflow.Services.Models.Answers;
 
 namespace CodeUnderflow.Services.Models.Questions
 {
@@ -26,6 +27,8 @@ namespace CodeUnderflow.Services.Models.Questions
         public DateTime PostDate { get; set; }
 
         public DateTime? EditDate { get; set; }
+
+        public ICollection<AnswersDetailsModel> Answers { get; set; }
 
         public void ConfigureMapping(Profile profile)
         {

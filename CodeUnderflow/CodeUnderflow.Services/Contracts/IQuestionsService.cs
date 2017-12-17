@@ -16,6 +16,7 @@ namespace CodeUnderflow.Services.Contracts
         QuestionEditModel GetEditInfo(int questionId);
         void Update(int questionId, string title, string content, string tags, DateTime editDate);
         void Delete(int questionId);
-        int RegisterVote(int questionId);
+        int RegisterVote(int questionId, string userId);
+        bool UserHasStared(int questionId, string userId);
     }
 }
