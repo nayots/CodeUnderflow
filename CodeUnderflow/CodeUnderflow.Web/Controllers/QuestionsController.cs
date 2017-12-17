@@ -5,8 +5,10 @@ using CodeUnderflow.Services.Models.Questions;
 using CodeUnderflow.Web.Models.QuestionsViewModels;
 using Ganss.XSS;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Net;
 
 namespace CodeUnderflow.Web.Controllers
 {
@@ -114,13 +116,6 @@ namespace CodeUnderflow.Web.Controllers
         [Authorize]
         public IActionResult Vote()
         {
-            //if (this.ModelState.IsValid && this.questionsService.Exists(registerVoteModel.QuestionId.Value))
-            //{
-            //    //DO STUFF
-
-            //    return RedirectToAction(nameof(Details), new { id = registerVoteModel.QuestionId.Value });
-            //}
-
             var headers = this.Request.Headers;
 
             if (headers.ContainsKey("QuestionId") && headers.ContainsKey("IsUpvote"))
@@ -129,8 +124,7 @@ namespace CodeUnderflow.Web.Controllers
                 {
                     if (this.questionsService.Exists(questionId))
                     {
-                        //DO STUFF
-                        return Ok($"Vote registered: {questionId}, {isUpvote}");
+                        
                     }
                     else
                     {

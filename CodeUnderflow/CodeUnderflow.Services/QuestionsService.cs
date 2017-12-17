@@ -142,5 +142,16 @@ namespace CodeUnderflow.Services
 
             this.db.SaveChanges();
         }
+
+        public int RegisterVote(int questionId)
+        {
+            //var question = this.db.Questions.First(q => q.Id == questionId);
+
+            //question.Votes++;
+
+            //this.db.SaveChanges();
+
+            return 0;
+        }
     }
 }

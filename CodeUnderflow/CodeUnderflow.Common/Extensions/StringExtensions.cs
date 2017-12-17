@@ -14,5 +14,22 @@ namespace CodeUnderflow.Common.Extensions
 
             return titles;
         }
+
+        public static ICollection<int> GetCookiesQuestionIds(this string cookieString)
+        {
+            var data = cookieString.Split(new char[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            ICollection<int> ids = new List<int>();
+
+            foreach (var entry in data)
+            {
+                if (int.TryParse(entry, out int id))
+                {
+                    ids.Add(id);
+                }
+            }
+
+            return ids;
+        }
     }
 }

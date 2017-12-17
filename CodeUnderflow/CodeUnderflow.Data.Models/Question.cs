@@ -24,7 +24,7 @@ namespace CodeUnderflow.Data.Models
 
         public ICollection<QuestionTag> Tags { get; set; } = new List<QuestionTag>();
 
-        public int Votes { get; set; }
+        public ICollection<Vote> Votes { get; set; } = new List<Vote>();
 
         public bool IsArchived { get; set; }
 

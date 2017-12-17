@@ -31,9 +31,8 @@ namespace CodeUnderflow.Services.Models.Questions
         {
             profile.CreateMap<Question, QuestionDetailsModel>()
                 .ForMember(dest => dest.Tags, cfg => cfg.MapFrom(source => source.Tags.Select(t => t.Tag.Title)))
-                .ForMember(dest => dest.AuthorName, cfg => cfg.MapFrom(source => source.Author.UserName));
+                .ForMember(dest => dest.AuthorName, cfg => cfg.MapFrom(source => source.Author.UserName))
+                .ForMember(des => des.Votes, cfg => cfg.MapFrom(source => source.Votes.Count));
         }
-
-        //TODO add other things later
     }
 }

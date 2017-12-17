@@ -22,7 +22,7 @@ function registerVote(isUpvote) {
 
     var dataRaw = {
         questionId: questionId,
-        isUpvote: `"${isUpvote}"`
+        isUpvote: `${isUpvote}`
     }
 
     //var data = JSON.stringify(dataRaw);

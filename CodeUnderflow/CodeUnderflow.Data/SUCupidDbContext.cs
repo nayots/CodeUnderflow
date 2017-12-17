@@ -14,11 +14,12 @@ namespace CodeUnderflow.Web.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Reply> Replies { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<Vote> Votes { get; set; }
 
         public CodeUnderflowDbContext(DbContextOptions<CodeUnderflowDbContext> options)
             : base(options)
         {
-            this.Database.Migrate();
+            //this.Database.Migrate();
             //this.Database.EnsureCreated();
         }
 
@@ -44,6 +45,11 @@ namespace CodeUnderflow.Web.Data
                 .WithOne(r => r.Author)
                 .HasForeignKey(r => r.AuthorId);
 
+            builder.Entity<User>()
+                .HasMany(u => u.Votes)
+                .WithOne(v => v.User)
+                .HasForeignKey(v => v.UserId);
+
             builder.Entity<Question>()
                 .HasMany(q => q.Answers)
                 .WithOne(a => a.Question)
@@ -56,6 +62,11 @@ namespace CodeUnderflow.Web.Data
                 .HasMany(q => q.Tags)
                 .WithOne(qt => qt.Question)
                 .HasForeignKey(qt => qt.QuestionId);
+
+            builder.Entity<Question>()
+                .HasMany(q => q.Votes)
+                .WithOne(v => v.Question)
+                .HasForeignKey(v => v.QuestionId);
 
             builder.Entity<Tag>()
                 .HasMany(t => t.Questions)

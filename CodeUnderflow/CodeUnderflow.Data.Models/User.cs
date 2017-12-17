@@ -13,6 +13,8 @@ namespace CodeUnderflow.Data.Models
 
         public ICollection<Reply> Replies { get; set; } = new List<Reply>();
 
+        public ICollection<Vote> Votes { get; set; } = new List<Vote>();
+
         public int Reputation { get; set; }
 
         public DateTime RegisterDate { get; set; }

@@ -11,9 +11,10 @@ using System;
 namespace CodeUnderflow.Data.Migrations
 {
     [DbContext(typeof(CodeUnderflowDbContext))]
-    partial class CodeUnderflowDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171217083156_Votes")]
+    partial class Votes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -199,7 +200,7 @@ namespace CodeUnderflow.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Votes");
+                    b.ToTable("Vote");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
