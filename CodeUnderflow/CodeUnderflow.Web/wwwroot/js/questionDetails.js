@@ -15,7 +15,6 @@ function verifyAnswer() {
         return false;
     }
     else {
-        console.log("In ok")
         $("#submitAnswer").prop("disabled", false);
         $("#answerTextWarning").hide();
         return true;
@@ -48,7 +47,7 @@ function verifyAnswer() {
 //        questionId: questionId
 //    }
 
-//    //var data = JSON.stringify(dataRaw);
+//    var data = JSON.stringify(dataRaw);
 
 //    var dataType = 'application/json; charset=utf-8';
 
@@ -56,7 +55,7 @@ function verifyAnswer() {
 //        type: "POST",
 //        url: '/questions/vote',
 //        dataType: "json",
-//        data: dataRaw,
+//        data: data,
 //        contentType: dataType,
 //        headers: {
 //            Accept: "application/json",

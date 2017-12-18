@@ -51,6 +51,7 @@ namespace CodeUnderflow.Web
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAnswersService, AnswersService>();
             services.AddTransient<ITagService, TagService>();
+            services.AddTransient<ISearchService, SearchService>();
 
             services.AddRouting(options => options.LowercaseUrls = true);
 

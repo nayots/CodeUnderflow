@@ -29,8 +29,4 @@
     <ProjectReference Include="..\CodeUnderflow.Services\CodeUnderflow.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\lib\font-awesome-5\" />
-  </ItemGroup>
-
 </Project>

@@ -136,8 +136,6 @@ namespace CodeUnderflow.Web.Controllers
             {
                 return NotFound();
             }
-
-            return BadRequest();
         }
     }
 }

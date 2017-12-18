@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CodeUnderflow.Services.Contracts;
+using CodeUnderflow.Services.Models.Search;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +11,23 @@ namespace CodeUnderflow.Web.Controllers
 {
     public class SearchController : Controller
     {
-        public IActionResult Index(string query)
+        private ISearchService searchService;
+
+        public SearchController(ISearchService searchService)
         {
-            return Ok(query);
+            this.searchService = searchService;
+        }
+
+        public IActionResult Query(string searchTerm)
+        {
+            List<SearchMatchModel> results = new List<SearchMatchModel>();
+
+            if (searchTerm != null && searchTerm.Trim().Length >= 2)
+            {
+                results = this.searchService.GetMatchingQuestions(searchTerm.Trim());
+            }
+
+            return Ok(results);
         }
     }
 }
