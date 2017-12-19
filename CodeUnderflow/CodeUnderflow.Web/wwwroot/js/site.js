@@ -31,7 +31,7 @@ function populateAutocomplete() {
         ,
         select: function (event, ui) {
             console.log(ui.item.url);
-            window.location = window.location + `questions/details/${ui.item.url}`;
+            window.location = window.location.origin + `/questions/details/${ui.item.url}`;
         }
     });
 }

@@ -22,7 +22,7 @@
             </div>
             @foreach (var tag in Model.Tags)
             {
-                <span class="badge badge-pill badge-info">@tag</span>
+                @Html.Partial("_Tag", tag)
             }
             <br />
             <div class="row answer">
@@ -103,10 +103,10 @@
         </div>
     </div>
     <div class="col-md-3 text-center">
-        <h2>Popular tags</h2>
+        <h2>Similar tags</h2>
         @foreach (var tag in Model.SimilarTags)
         {
-            <span class="badge badge-pill badge-info">@tag</span>
+            @Html.Partial("_Tag", tag)
         }
         <br />
         <h2>Helpful materials</h2>

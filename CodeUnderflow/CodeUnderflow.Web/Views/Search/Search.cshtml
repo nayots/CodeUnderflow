@@ -1,0 +1,65 @@
+﻿@model SearchResultModel
+<br />
+<div class="row">
+    @foreach (var result in Model.Results)
+    {
+        <div class="col-sm-3">
+            <div class="card search-card-head">
+                <div class="card-block search-card-body">
+                    <h3 class="card-title text-truncate">@result.Title</h3>
+                    <div class="text-right">
+                    <span class="text-left">Answers: <span class="badge badge-dark badge-pill">@result.AnswersCount</span></span>
+
+                    <a asp-area="" asp-controller="Questions" asp-action="Details" asp-route-id="@result.Id" class="btn btn-sm btn-outline-info text-right">View</a> 
+                    </div>
+                    <div>
+                        Tags:
+                        @foreach (var tag in result.Tags)
+                        {
+                            @Html.Partial("_Tag", tag)
+                        }
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Posted on: @result.PostDate.ToLocalTime()</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@{
+    var encodedSearchTerm = System.Net.WebUtility.HtmlDecode(Model.SearchTerm);
+
+    var queryString = Model.SearchTerm != null ? $"&searchTerm={encodedSearchTerm}" : string.Empty;
+    if (queryString.Length > 0 && Model.IsTagSearch)
+    {
+        queryString = queryString + "&IsTagSearch=true";
+    }
+}
+@if (this.ViewData.ContainsKey("Pagination") && (bool)this.ViewData["Pagination"])
+{
+    var currentPageNumber = (int)this.ViewData["CurrentPage"] <= 0 ? 1 : (int)this.ViewData["CurrentPage"] + 1;
+    <div class="row">
+        <div class="col-md-4 offset-4">
+            <div class="text-center">
+                <div><small>Page @currentPageNumber of @this.ViewData["MaxPages"]</small></div>
+                <ul class="pagination" style="justify-content: center">
+
+                    @for (int i = 0; i < (int)this.ViewData["MaxPages"]; i++)
+                    {
+                        if ((int)this.ViewData["CurrentPage"] == @i)
+                        {
+                            <li class="page-item active"><a class="page-link" href="?page=@i@queryString">@(i + 1)</a></li>
+                        }
+                        else
+                        {
+                            <li class="page-item"><a class="page-link" href="?page=@i@queryString">@(i + 1)</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+}
