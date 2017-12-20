@@ -5,10 +5,6 @@ using CodeUnderflow.Web.Models.AnswersViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeUnderflow.Web.Controllers
 {
@@ -32,7 +28,7 @@ namespace CodeUnderflow.Web.Controllers
             if (this.ModelState.IsValid && this.questionsService.Exists(newAnswerModel.QuestionId.Value))
             {
                 this.answersService.Create(newAnswerModel.QuestionId.Value, this.User.GetUserId(), newAnswerModel.Content, DateTime.UtcNow);
-                
+
                 return RedirectToAction("Details", "Questions", new { id = newAnswerModel.QuestionId });
             }
 
@@ -43,11 +39,11 @@ namespace CodeUnderflow.Web.Controllers
         [Authorize]
         public IActionResult Delete(DeleteAnswerModel deleteAnswerModel)
         {
-            if (this.ModelState.IsValid 
-                && deleteAnswerModel.AnswerId != null 
-                && this.answersService.Exists(deleteAnswerModel.AnswerId.Value) 
-                && (this.answersService.UserCanEdit(deleteAnswerModel.AnswerId.Value, this.User.GetUserId()) 
-                    || this.User.IsInRole(GlobalConstants.AdminRoleName) 
+            if (this.ModelState.IsValid
+                && deleteAnswerModel.AnswerId != null
+                && this.answersService.Exists(deleteAnswerModel.AnswerId.Value)
+                && (this.answersService.UserCanEdit(deleteAnswerModel.AnswerId.Value, this.User.GetUserId())
+                    || this.User.IsInRole(GlobalConstants.AdminRoleName)
                     || this.User.IsInRole(GlobalConstants.ModeratorRoleName)))
             {
                 this.answersService.Delete(deleteAnswerModel.AnswerId.Value);
@@ -62,11 +58,11 @@ namespace CodeUnderflow.Web.Controllers
         [Authorize]
         public IActionResult Edit(int? answerId, int? questionId)
         {
-            if (answerId != null && questionId != null 
-                && this.answersService.Exists(answerId.Value) 
-                && this.questionsService.Exists(questionId.Value) 
-                && (this.answersService.UserCanEdit(answerId.Value, this.User.GetUserId()) 
-                    || this.User.IsInRole(GlobalConstants.AdminRoleName) 
+            if (answerId != null && questionId != null
+                && this.answersService.Exists(answerId.Value)
+                && this.questionsService.Exists(questionId.Value)
+                && (this.answersService.UserCanEdit(answerId.Value, this.User.GetUserId())
+                    || this.User.IsInRole(GlobalConstants.AdminRoleName)
                     || this.User.IsInRole(GlobalConstants.ModeratorRoleName)))
             {
                 EditAnswerModel model = new EditAnswerModel();

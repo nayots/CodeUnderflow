@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using CodeUnderflow.Common.AutoMapper;
+using System;
+using System.Linq;
 
 namespace CodeUnderflow.Web.Infrastructure.AutoMapper
 {

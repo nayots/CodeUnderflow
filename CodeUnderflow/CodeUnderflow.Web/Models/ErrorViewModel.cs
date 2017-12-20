@@ -1,5 +1,3 @@
-using System;
-
 namespace CodeUnderflow.Web.Models
 {
     public class ErrorViewModel

@@ -1,12 +1,10 @@
-﻿using CodeUnderflow.Common.AutoMapper;
+﻿using AutoMapper;
+using CodeUnderflow.Common.AutoMapper;
 using CodeUnderflow.Data.Models;
+using CodeUnderflow.Services.Models.Answers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using CodeUnderflow.Services.Models.Answers;
 
 namespace CodeUnderflow.Services.Models.Questions
 {

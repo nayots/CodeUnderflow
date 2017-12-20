@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
+﻿using CodeUnderflow.Data.Models;
+using CodeUnderflow.Services.Contracts;
+using CodeUnderflow.Web.Models.ManageViewModels;
+using CodeUnderflow.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using CodeUnderflow.Web.Models;
-using CodeUnderflow.Web.Models.ManageViewModels;
-using CodeUnderflow.Web.Services;
-using CodeUnderflow.Services.Contracts;
-using CodeUnderflow.Data.Models;
+using System;
+using System.Linq;
+using System.Text;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 
 namespace CodeUnderflow.Web.Controllers
 {

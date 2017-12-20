@@ -1,9 +1,5 @@
 ﻿using CodeUnderflow.Services.Models.Admin;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeUnderflow.Services.Contracts
 {
@@ -18,8 +14,11 @@ namespace CodeUnderflow.Services.Contracts
         void AddRoleToUser(string userId, string role);
 
         void RemoveRoleToUser(string userId, string role);
+
         void SuspendUser(string userId);
+
         void ReinstateUser(string userId);
+
         bool CheckIfDeleted(string username);
     }
 }

@@ -1,15 +1,13 @@
-﻿using CodeUnderflow.Common.Extensions;
+﻿using AutoMapper.QueryableExtensions;
+using CodeUnderflow.Common.Extensions;
 using CodeUnderflow.Data.Models;
 using CodeUnderflow.Services.Contracts;
+using CodeUnderflow.Services.Models.Questions;
 using CodeUnderflow.Web.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CodeUnderflow.Services.Models.Questions;
-using AutoMapper.QueryableExtensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace CodeUnderflow.Services
 {
@@ -39,8 +37,6 @@ namespace CodeUnderflow.Services
 
             return question.Id;
         }
-
-
 
         public bool Exists(int questionId)
         {
@@ -83,7 +79,6 @@ namespace CodeUnderflow.Services
             this.UpdateTags(question, tags);
 
             this.db.SaveChanges();
-
         }
 
         private void UpdateTags(Question question, string tags)

@@ -6,9 +6,6 @@ using CodeUnderflow.Web.Controllers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CodeUnderflow.Web.Areas.Admin.Controllers
@@ -67,7 +64,7 @@ namespace CodeUnderflow.Web.Areas.Admin.Controllers
                             await _signInManager.SignOutAsync();
                         }).Wait();
 
-                        return RedirectToAction(nameof(HomeController.Index), "Home", new {area = "" });
+                        return RedirectToAction(nameof(HomeController.Index), "Home", new { area = "" });
                     }
                 }
             }

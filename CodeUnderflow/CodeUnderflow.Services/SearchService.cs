@@ -1,14 +1,11 @@
-﻿using CodeUnderflow.Services.Contracts;
+﻿using AutoMapper.QueryableExtensions;
+using CodeUnderflow.Services.Contracts;
+using CodeUnderflow.Services.Models.Questions;
+using CodeUnderflow.Services.Models.Search;
 using CodeUnderflow.Web.Data;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CodeUnderflow.Services.Models.Search;
-using AutoMapper.QueryableExtensions;
-using CodeUnderflow.Services.Models.Questions;
-using Microsoft.EntityFrameworkCore;
 
 namespace CodeUnderflow.Services
 {
@@ -29,7 +26,7 @@ namespace CodeUnderflow.Services
                 .ProjectTo<SearchMatchModel>().ToList();
         }
 
-        public IEnumerable<QuestionInfoModel> GetResults(bool isTagSearch,string searchTerm = "")
+        public IEnumerable<QuestionInfoModel> GetResults(bool isTagSearch, string searchTerm = "")
         {
             var results = new List<QuestionInfoModel>();
 

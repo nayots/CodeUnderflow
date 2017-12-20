@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CodeUnderflow.Common.Extensions;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CodeUnderflow.Common.Extensions;
 
 namespace CodeUnderflow.Common.Validations
 {

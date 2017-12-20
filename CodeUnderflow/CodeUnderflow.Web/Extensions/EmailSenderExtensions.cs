@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using CodeUnderflow.Services.Contracts;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using CodeUnderflow.Web.Services;
-using CodeUnderflow.Services.Contracts;
 
 namespace CodeUnderflow.Web.Services
 {

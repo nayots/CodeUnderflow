@@ -1,13 +1,9 @@
-﻿using CodeUnderflow.Common.AutoMapper;
+﻿using AutoMapper;
+using CodeUnderflow.Common.AutoMapper;
 using CodeUnderflow.Common.Validations;
 using CodeUnderflow.Data.Models;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
 
 namespace CodeUnderflow.Services.Models.Questions
 {

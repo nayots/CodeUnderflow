@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CodeUnderflow.Common
+﻿namespace CodeUnderflow.Common
 {
     public static class GlobalConstants
     {
@@ -12,6 +6,6 @@ namespace CodeUnderflow.Common
         public const string ModeratorRoleName = "Moderator";
         public const string QuestionVoteCookiesName = "QuestionsVoted";
         public const int MaxItemsPerPage = 10;
-        public static readonly string[] AvailableRoles = { AdminRoleName, ModeratorRoleName};
+        public static readonly string[] AvailableRoles = { AdminRoleName, ModeratorRoleName };
     }
 }

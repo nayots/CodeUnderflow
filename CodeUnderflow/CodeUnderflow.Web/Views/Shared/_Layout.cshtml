@@ -36,21 +36,21 @@
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Questions" asp-action="Index">Questions<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" asp-area="" asp-controller="Questions" asp-action="Index">Questions<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Users" asp-action="Index">Users<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">Users<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Tags" asp-action="Index">What's Hot<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" asp-area="" asp-controller="Tags" asp-action="Index">What's Hot<span class="sr-only">(current)</span></a>
                 </li>
                 @if (this.User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Questions" asp-action="New">Ask<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" asp-area="" asp-controller="Questions" asp-action="New">Ask<span class="sr-only">(current)</span></a>
                     </li>
                     @if (this.User.IsInRole(GlobalConstants.AdminRoleName))
                     {
@@ -63,7 +63,7 @@
                     }
                 }
             </ul>
-            <form class="form-inline" asp-controller="Search" asp-action="Search" method="get">
+            <form class="form-inline" asp-area="" asp-controller="Search" asp-action="Search" method="get">
                 <div class="input-group">
                     <input type="text" name="searchTerm" id="autocomplete" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">

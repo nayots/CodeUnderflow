@@ -5,10 +5,8 @@ using CodeUnderflow.Services.Models.Questions;
 using CodeUnderflow.Web.Models.QuestionsViewModels;
 using Ganss.XSS;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net;
 
 namespace CodeUnderflow.Web.Controllers
 {
@@ -114,7 +112,6 @@ namespace CodeUnderflow.Web.Controllers
                 model.SimilarTags = this.tagService.GetSimilarTags(model.Tags, 15);
 
                 this.ViewData["youtubeKeyword"] = Uri.EscapeDataString(string.Join(" ", model.Tags));
-
 
                 return View(model);
             }

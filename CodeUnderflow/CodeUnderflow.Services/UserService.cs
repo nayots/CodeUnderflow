@@ -4,11 +4,8 @@ using CodeUnderflow.Services.Contracts;
 using CodeUnderflow.Services.Models.Admin;
 using CodeUnderflow.Web.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CodeUnderflow.Services
