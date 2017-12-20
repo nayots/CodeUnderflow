@@ -52,6 +52,15 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Questions" asp-action="New">Ask<span class="sr-only">(current)</span></a>
                     </li>
+                    @if (this.User.IsInRole(GlobalConstants.AdminRoleName))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <div class="dropdown-menu">
+                                <a asp-area="Admin" asp-controller="Admin" asp-action="All" class="dropdown-item">Manage Roles</a>
+                            </div>
+                        </li>
+                    }
                 }
             </ul>
             <form class="form-inline" asp-controller="Search" asp-action="Search" method="get">

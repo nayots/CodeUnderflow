@@ -30,6 +30,7 @@ namespace CodeUnderflow.Web.Controllers
         private readonly ILogger _logger;
         private CodeUnderflowDbContext db;
         private RoleManager<IdentityRole> _roleManager;
+        private IUserService _userService;
 
         public AccountController(
             UserManager<User> userManager,
@@ -37,7 +38,8 @@ namespace CodeUnderflow.Web.Controllers
             IEmailSender emailSender,
             ILogger<AccountController> logger,
             CodeUnderflowDbContext dbContext,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            IUserService userService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,6 +47,7 @@ namespace CodeUnderflow.Web.Controllers
             _logger = logger;
             db = dbContext;
             _roleManager = roleManager;
+            _userService = userService;
         }
 
         [TempData]
@@ -69,6 +72,13 @@ namespace CodeUnderflow.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+                var isSuspended = await this.CheckIfSuspended(model.Username);
+                if (isSuspended)
+                {
+                    this.ModelState.AddModelError(string.Empty, $"Account {model.Username} is suspended.");
+                    return View(model);
+                }
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -95,6 +105,13 @@ namespace CodeUnderflow.Web.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private async Task<bool> CheckIfSuspended(string username)
+        {
+            var result = Task.Run(() => this._userService.CheckIfDeleted(username));
+
+            return await result;
         }
 
         [HttpGet]
@@ -240,6 +257,12 @@ namespace CodeUnderflow.Web.Controllers
                         if (!adminRoleExists)
                         {
                             await _roleManager.CreateAsync(new IdentityRole(GlobalConstants.AdminRoleName));
+                        }
+
+                        var moderatorRoleExists = await _roleManager.RoleExistsAsync(GlobalConstants.ModeratorRoleName);
+                        if (!moderatorRoleExists)
+                        {
+                            await _roleManager.CreateAsync(new IdentityRole(GlobalConstants.ModeratorRoleName));
                         }
 
                         await this._userManager.AddToRoleAsync(user, GlobalConstants.AdminRoleName);

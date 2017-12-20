@@ -11,6 +11,7 @@ namespace CodeUnderflow.Common
         public const string AdminRoleName = "Administrator";
         public const string ModeratorRoleName = "Moderator";
         public const string QuestionVoteCookiesName = "QuestionsVoted";
-        public const int MaxItemsPerPage = 3;
+        public const int MaxItemsPerPage = 10;
+        public static readonly string[] AvailableRoles = { AdminRoleName, ModeratorRoleName};
     }
 }
