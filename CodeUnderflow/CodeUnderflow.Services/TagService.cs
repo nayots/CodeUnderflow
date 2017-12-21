@@ -15,6 +15,11 @@ namespace CodeUnderflow.Services
             this.db = db;
         }
 
+        public IEnumerable<string> GetPopularTags(int countToTake)
+        {
+            return this.db.Tags.OrderByDescending(t => t.Questions.Count).Take(countToTake).Select(t => t.Title).ToList();
+        }
+
         public IEnumerable<string> GetSimilarTags(IEnumerable<string> tags, int count)
         {
             var result = this.db

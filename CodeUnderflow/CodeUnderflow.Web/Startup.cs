@@ -81,6 +81,7 @@ namespace CodeUnderflow.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseStatusCodePagesWithReExecute("/StatusCode/{0}");
 
             app.UseStaticFiles();
 

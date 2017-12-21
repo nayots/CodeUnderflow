@@ -1,0 +1,27 @@
+﻿@model int
+@{
+    this.ViewData["Title"] = "Opps";
+}
+<br />
+<div class="row">
+    <div class="col-md-6 offset-3">
+        @switch (Model)
+        {
+            case 404:
+                <img class="img-" src="http://res.cloudinary.com/fehbot/image/upload/v1513886247/CodeUnderflow/error404.svg" />
+                break;
+
+            case 401:
+                <img class="img-" src="http://res.cloudinary.com/fehbot/image/upload/v1513886836/CodeUnderflow/no-stopping.svg" />
+                break;
+
+            case 500:
+                <img class="img-" src="http://res.cloudinary.com/fehbot/image/upload/v1513886589/CodeUnderflow/program-error.svg" />
+                break;
+
+            default:
+                <img class="img-" src="http://res.cloudinary.com/fehbot/image/upload/v1513886727/CodeUnderflow/browser.svg" />
+                break;
+        }
+    </div>
+</div>

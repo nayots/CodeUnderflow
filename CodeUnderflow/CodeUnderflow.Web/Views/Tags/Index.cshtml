@@ -1,0 +1,13 @@
+﻿@model IEnumerable<string>
+@{
+    this.ViewData["Title"] = "Popular tags";
+}
+<div class="row">
+    <div class="col-md-8 offset-2 text-lg-center">
+        <h2 class="text-center">The most popular tags on the site</h2>
+        @foreach (var tag in Model)
+            {
+            <a asp-area="" asp-controller="Search" asp-action="Search" asp-route-searchTerm="@tag" asp-route-IsTagSearch="true"><span class="badge badge-pill badge-info" style="font-size:30pt;margin:5px"> @tag</span></a>
+        }
+    </div>
+</div>
