@@ -9,7 +9,7 @@ function populateAutocomplete() {
     let searchResults = [];
 
     if (searchValue.length >= 2) {
-        $.get(`http://localhost:52303/search/query?searchTerm=${encodeURIComponent(searchValue)}`, function (data) {
+        $.get(`http://codeunderflow.azurewebsites.net/search/query?searchTerm=${encodeURIComponent(searchValue)}`, function (data) {
             searchResults = data;
             console.log(data);
         });

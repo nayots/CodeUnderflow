@@ -45,7 +45,7 @@ namespace CodeUnderflow.Web.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                int newQuestionId = this.questionsService.CreateNew(newQuestionModel.Title, newQuestionModel.Content, newQuestionModel.Tags, DateTime.UtcNow, this.User.GetUserId());
+                int newQuestionId = this.questionsService.CreateNew(newQuestionModel.Title.Trim(), newQuestionModel.Content, newQuestionModel.Tags, DateTime.UtcNow, this.User.GetUserId());
 
                 return RedirectToAction(nameof(Details), new { id = newQuestionId });
             }

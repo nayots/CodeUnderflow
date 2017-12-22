@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
     
 </head>
 <body>
@@ -28,7 +29,7 @@
                     @await Html.PartialAsync("_LoginPartial")
         </nav>*@
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" asp-controller="Home" asp-action="Index">CodeUnderflow</a>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CodeUnderflow</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -71,6 +72,7 @@
         </div>
         @await Html.PartialAsync("_LoginPartial")
     </nav>
+    <br />
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -103,7 +105,7 @@
                 integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
                 crossorigin="anonymous"></script>
     </environment>
-    
+    <script src="~/js/site.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

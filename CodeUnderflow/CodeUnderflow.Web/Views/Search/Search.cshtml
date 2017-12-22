@@ -30,6 +30,10 @@
         </div>
     }
 </div>
+    @if (!this.Model.Results.Any())
+    {
+        <h1 class="text-center">No results :(</h1>
+    }
 
 @{
     var encodedSearchTerm = System.Net.WebUtility.HtmlDecode(Model.SearchTerm);
